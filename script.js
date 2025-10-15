@@ -1,4 +1,4 @@
-let menuDishes = [
+let mainDishes = [
   {
     "name": "Pizza Margherita",
     "price": 22.00,
@@ -41,7 +41,11 @@ let menuDishes = [
     "description": "Frittierte Zwiebelringe, sagtiges Rindfleisch und unsere Speziasauce vollenden diesen Burger zum Genuss",
     "image": "./assets/img/beef-and-onion-burger.jpg"
   },
-  {
+  
+];
+
+let sideDishes = [
+{
     "name": "Grüner Salat",
     "price": 12.00,
     "description": "Frischer Blattsalat mit leichtem Dressing und frischen Kräutern",
@@ -59,18 +63,34 @@ let menuDishes = [
     "description": "Goldene, knusprige Pommes",
     "image": "./assets/img/pommes-frites.jpg"
   }
-];
+]
 
+function init() {
+renderMainDishes(),
+renderSideDishes();
+}
 
 function renderMainDishes() {
 
   let container = document.getElementById('render-main-dishes');
   container.innerHTML = "";
 
-  for (let index = 0; index < menuDishes.length; index++) {
-    const dish = menuDishes[index];
+  for (let index = 0; index < mainDishes.length; index++) {
+    const dish = mainDishes[index];
 
-    container.innerHTML += getMainDishesTemplate(dish, index);
+    container.innerHTML += getDishTemplate(dish, index);
+  }
+}
+
+function renderSideDishes() {
+
+  let sdContainer = document.getElementById('render-side-dishes');
+  sdContainer.innerHTML = "";
+
+  for (let indexsd = 0; indexsd < sideDishes.length; indexsd++) {
+    const sidedish = sideDishes[indexsd];
+
+    sdContainer.innerHTML += getDishTemplate(sidedish, indexsd);
   }
 }
 
@@ -85,30 +105,43 @@ function getMainDishesTemplate(dish, index) {
 }
 
 
+
+
+function getSideDishesTemplate(sidedish, indexsd) {
+  return `
+<button class="dish-card" onclick="addToCart(${indexsd})">
+<img src="${sidedish.image}" alt="${sidedish.name}">
+<h3>${sidedish.name}</h3>
+<p>CHF ${sidedish.price.toFixed(2)}</p>
+</button>
+`;
+}
+
+
 let cart = [];
 let deliveryCost = 5;
+let amount = 0;
 
 function addToCart(index) {
-  const product = menuDishes[index];
-  let found = false;
+  const product = mainDishes[index];
+  let itemFound = false;
 
-  // Prüfen, ob Produkt schon im Warenkorb ist
+  // check if item is already in cart, loops through existing items
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].name === product.name) {
-      cart[i].amount++; // Menge erhöhen
-      found = true;
+      cart[i].amount++;
+      itemFound = true;
       break;
     }
   }
-
-  // Wenn Produkt noch nicht vorhanden → neu hinzufügen
-  if (!found) {
-    cart.push({
-      name: product.name,
-      price: product.price,
-      amount: 1
-    });
-  }
+  // if item not found, push to cart-array
+    if (!itemFound) {
+      cart.push({
+        name: product.name,
+        price: product.price,
+        amount: 1
+      });
+    }
   renderCart();
 }
 
@@ -117,13 +150,13 @@ function renderCart() {
   let basket = document.getElementById('basket-div');
   basket.innerHTML = "";
 
-   basket.innerHTML += `
+  basket.innerHTML += `
     <div class="basket-header">
       <h2>Warenkorb</h2>
     </div>
   `;
 
-   // Produkte im Warenkorb
+  // Produkte im Warenkorb
   for (let i = 0; i < cart.length; i++) {
     basket.innerHTML += getBasketTemplate(cart[i], i);
   }
