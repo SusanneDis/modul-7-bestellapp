@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BestellApp</title>
+
+  <script src="./scripts/templates.js"></script>
+  <script src="./script.js"></script>
+
+  <link rel="stylesheet" href="./styles/standard.css" />
+  <link rel="stylesheet" href="./styles/assets.css" />
+  <link rel="stylesheet" href="./styles/fonts.css" />
+  <link rel="stylesheet" href="./style.css" />
+
+  <link rel="icon" type="image/png" href="./assets/icons/favicon/favicon-32x32.png" />
+</head>
+
+
+<body onload="renderMainDishes()">
+  <header>
+    <img class="logo-bestellapp" src="./assets/icons/logo/Bestell App- Logo.svg" alt="Logo Bestellapp">
+    <svg class="burger-menu" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+      fill="#1f1f1f">
+      <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+    </svg>
+  </header>
+
+
+  <div class="menu-content">
+
+    <section class="menu-section">
+
+      <div class="hero-div">
+        <img src="./assets/img/pizza-in-forno.jpg" alt="Pizzas im Pizzofen">
+      </div>
+      <div class="restaurant-name-div padding">
+        <h1>Pizza & Burger Tempel</h1>
+        <p class="orange-color">Bewertung (4,2 von 5 Sternen)</p>
+      </div>
+
+      <div class="main-dishes padding">
+        <svg class="arrow-right" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+          fill="#1f1f1f">
+          <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+        </svg>
+        <h2>Hauptgerichte</h2>
+      </div>
+
+      <div class="burger-div">
+        <img src="./assets/img/burger-restaurant.jpg" alt="">
+      </div>
+
+      <div id="render-main-dishes" class="render-main-dishes">
+      </div>
+
+    </section>
+
+    <section class="shopping-cart">
+
+      <div class="basket-div" id="basket-div">
+        <div class="basket-header">
+          <h2>Warenkorb</h2>
+        </div>        
+      </div>
+    </section>
+
+  </div>
+
+
+
+
+  <footer>
+
+
+
+  </footer>
+</body>
+
+</html>
