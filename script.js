@@ -62,17 +62,53 @@ let sideDishes = [
     "price": 9.00,
     "description": "Goldene, knusprige Pommes",
     "image": "./assets/img/pommes-frites.jpg"
+  },
+{
+    "name": "Potatoe Wedges",
+    "price": 9.00,
+    "description": "Würzig-knusprige Wedges",
+    "image": "./assets/img/potatoe-wedges.jpg"
   }
 ]
 
+let drinksArray = [
+{
+    "name": "Cola",
+    "price": 4.00,
+    "description": "Erfrischende Cola mit natürlichen Geschmackstoffen",
+    "image": "./assets/img/cola.jpg"
+  },
+{
+    "name": "Orangen-Limonade",
+    "price": 4.00,
+    "description": "Fruchtige Orangen-Limonade mit natürlichen Zutaten",
+    "image": "./assets/img/orangen-limonade.jpg"
+  },
+{
+    "name": "Zitronen-Limonade",
+    "price": 4.00,
+    "description": "Erfrischende Zitronen-Limonade mit natürlichen Zutaten",
+    "image": "./assets/img/zitronen-limonade.jpg"
+  },
+    {
+    "name": "Bier",
+    "price": 6.00,
+    "description": "Erfrischendes Lagerbier",
+    "image": "./assets/img/bier.jpg"
+    }
+]
+
 let cart = [];
-let deliveryCost = 5;
+let deliveryCost = 8;
 
 
 function init() {
   renderMainDishes(),
-    renderSideDishes();
+  renderSideDishes(),
+  renderDrinks();
 }
+
+// Main-Dishes
 
 function renderMainDishes() {
 
@@ -96,6 +132,8 @@ function getMainDishesTemplate(maindish, index) {
 `;
 }
 
+// Side-Dishes
+
 function renderSideDishes() {
 
   let sdContainer = document.getElementById('render-side-dishes');
@@ -118,6 +156,33 @@ function getSideDishesTemplate(sidedish, index) {
 `;
 }
 
+// Drinks
+
+function renderDrinks() {
+
+  let drinksContainer = document.getElementById('render-drinks');
+  drinksContainer.innerHTML = "";
+
+  for (let index = 0; index < drinksArray.length; index++) {
+    const drinks = drinksArray[index];
+
+    drinksContainer.innerHTML += getDrinksTemplate(drinks, index);
+  }
+}
+
+function getDrinksTemplate(drinks, index) {
+  return `
+<button class="dish-card" onclick="addToCart('drinks', ${index})">
+<img src="${drinks.image}" alt="${drinks.name}">
+<h3>${drinks.name}</h3>
+<p>CHF ${drinks.price.toFixed(2)}</p>
+</button>
+`;
+}
+
+// Add to cart
+
+// Check if main, side or drinks
 function addToCart(type, index) {
 
   let product;
@@ -125,6 +190,8 @@ function addToCart(type, index) {
     product = mainDishes[index];
   } else if (type === 'side') {
     product = sideDishes[index];
+  } else if (type === 'drinks') {
+    product = drinksArray[index];
   } else {
     return;
   }
@@ -137,6 +204,7 @@ function addToCart(type, index) {
       break;
     }
   }
+
   if (!itemFound) {
     cart.push({
       name: product.name,
