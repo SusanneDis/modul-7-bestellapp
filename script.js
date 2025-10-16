@@ -24,22 +24,28 @@ let mainDishes = [
     "image": "./assets/img/pizza-salami-olive.jpg"
   },
   {
-    "name": "Cheeseburger Countrstyle",
-    "price": 24.00,
+    "name": "Cheeseburger Countrystyle",
+    "price": 15.00,
     "description": "Saftiges Rindfleisch, geschmolzener Käse, Zwiebeln udn BBQ-Note - rustikal und herzhaft",
     "image": "./assets/img/cheese-burger-country.jpg"
   },
   {
     "name": "Double-Cheeseburger",
-    "price": 23.00,
+    "price": 15.00,
     "description": "Zwei Lagen Rindfleisch, doppelt Käse und unsere Special-Sauce - doppelt Genuss",
     "image": "./assets/img/double-cheese-burger.jpg"
   },
   {
     "name": "Beef und Fried-Onion Burger",
-    "price": 22.50,
-    "description": "Frittierte Zwiebelringe, sagtiges Rindfleisch und unsere Speziasauce vollenden diesen Burger zum Genuss",
+    "price": 16.00,
+    "description": "Frittierte Zwiebelringe, saftiges Rindfleisch und unsere Spezialsauce vollenden diesen Burger zum Genuss",
     "image": "./assets/img/beef-and-onion-burger.jpg"
+  },
+   {
+    "name": "Vegetarischer Burger aus Kirchererbsen",
+    "price": 14.00,
+    "description": "Fein gewürztes Patty aus Kirchererbsen mit Zwiebelringen und unserer Spezialsauce",
+    "image": "./assets/img/vegetarian-burger.jpg"
   },
 
 ];
@@ -103,9 +109,24 @@ let deliveryCost = 8;
 
 
 function init() {
+  loadFromLocalStorage();
   renderMainDishes(),
   renderSideDishes(),
   renderDrinks();
+  renderCart();
+
+
+// Local Storage
+
+function loadFromLocalStorage() {
+const storedCart = localStorage.getItem('cart');
+if (storedCart) {
+  cart = JSON.parse(storedCart);
+}
+}
+
+function saveToLocalStorage() {
+localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 // Main-Dishes
@@ -195,7 +216,7 @@ function addToCart(type, index) {
   } else {
     return;
   }
-
+// Checks if item already exists
   let itemFound = false;
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].name === product.name) {
@@ -204,7 +225,6 @@ function addToCart(type, index) {
       break;
     }
   }
-
   if (!itemFound) {
     cart.push({
       name: product.name,

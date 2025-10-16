@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BestellApp</title>
 
-  <script src="./scripts/templates.js"></script>
-  <script src="./script.js"></script>
+  <script defer src="./scripts/templates.js"></script>
+  <script defer src="./script.js"></script>
 
   <link rel="stylesheet" href="./styles/standard.css" />
   <link rel="stylesheet" href="./styles/assets.css" />
@@ -19,6 +19,8 @@
 
 
 <body onload="init()">
+  
+  <!--Header-->
   <header>
     <img class="logo-bestellapp" src="./assets/icons/logo/Bestell App- Logo.svg" alt="Logo Bestellapp">
     <svg class="burger-menu" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -41,7 +43,7 @@
         <p class="orange-color">Bewertung (4,2 von 5 Sternen)</p>
       </div>
 
-        <!--Main Dishes-->
+      <!--Main Dishes-->
       <div class="main-dishes padding">
         <svg class="arrow-right" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#1f1f1f">
@@ -57,7 +59,7 @@
       <div id="render-main-dishes" class="render-main-dishes">
       </div>
 
-        <!--Side Dishes-->
+      <!--Side Dishes-->
       <div class="main-dishes padding">
         <svg class="arrow-right" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#1f1f1f">
@@ -69,7 +71,7 @@
       <div id="render-side-dishes" class="render-main-dishes">
       </div>
 
-        <!--Drinks-->
+      <!--Drinks-->
       <div class="main-dishes padding">
         <svg class="arrow-right" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
           fill="#1f1f1f">
@@ -91,12 +93,17 @@
         </div>
       </div>
     </section>
-
   </div>
 
+
   <footer>
-
-
+    <img src="./assets/icons/logo/Logo.png" alt="Logo Bestellapp">
+    <p>Follow us</p>
+    <div class="social-media-icons">
+      <img src="./assets/icons/facebook.png" alt="Facebook Logo">
+      <img src="./assets/icons/instagram.png" alt="Instagram Logo">
+      <img src="./assets/icons/youtube.png" alt="Youtube Logo">
+    </div>
   </footer>
 
 </body>
