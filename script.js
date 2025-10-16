@@ -41,11 +41,11 @@ let mainDishes = [
     "description": "Frittierte Zwiebelringe, sagtiges Rindfleisch und unsere Speziasauce vollenden diesen Burger zum Genuss",
     "image": "./assets/img/beef-and-onion-burger.jpg"
   },
-  
+
 ];
 
 let sideDishes = [
-{
+  {
     "name": "Grüner Salat",
     "price": 12.00,
     "description": "Frischer Blattsalat mit leichtem Dressing und frischen Kräutern",
@@ -65,9 +65,13 @@ let sideDishes = [
   }
 ]
 
+let cart = [];
+let deliveryCost = 5;
+
+
 function init() {
-renderMainDishes(),
-renderSideDishes();
+  renderMainDishes(),
+    renderSideDishes();
 }
 
 function renderMainDishes() {
@@ -76,10 +80,20 @@ function renderMainDishes() {
   container.innerHTML = "";
 
   for (let index = 0; index < mainDishes.length; index++) {
-    const dish = mainDishes[index];
+    const maindish = mainDishes[index];
 
-    container.innerHTML += getDishTemplate(dish, index);
+    container.innerHTML += getMainDishesTemplate(maindish, index);
   }
+}
+
+function getMainDishesTemplate(maindish, index) {
+  return `
+<button class="dish-card" onclick="addToCart('main', ${index})">
+<img src="${maindish.image}" alt="${maindish.name}">
+<h3>${maindish.name}</h3>
+<p>CHF ${maindish.price.toFixed(2)}</p>
+</button>
+`;
 }
 
 function renderSideDishes() {
@@ -87,29 +101,16 @@ function renderSideDishes() {
   let sdContainer = document.getElementById('render-side-dishes');
   sdContainer.innerHTML = "";
 
-  for (let indexsd = 0; indexsd < sideDishes.length; indexsd++) {
-    const sidedish = sideDishes[indexsd];
+  for (let index = 0; index < sideDishes.length; index++) {
+    const sidedish = sideDishes[index];
 
-    sdContainer.innerHTML += getDishTemplate(sidedish, indexsd);
+    sdContainer.innerHTML += getSideDishesTemplate(sidedish, index);
   }
 }
 
-function getMainDishesTemplate(dish, index) {
+function getSideDishesTemplate(sidedish, index) {
   return `
-<button class="dish-card" onclick="addToCart(${index})">
-<img src="${dish.image}" alt="${dish.name}">
-<h3>${dish.name}</h3>
-<p>CHF ${dish.price.toFixed(2)}</p>
-</button>
-`;
-}
-
-
-
-
-function getSideDishesTemplate(sidedish, indexsd) {
-  return `
-<button class="dish-card" onclick="addToCart(${indexsd})">
+<button class="dish-card" onclick="addToCart('side', ${index})">
 <img src="${sidedish.image}" alt="${sidedish.name}">
 <h3>${sidedish.name}</h3>
 <p>CHF ${sidedish.price.toFixed(2)}</p>
@@ -117,16 +118,18 @@ function getSideDishesTemplate(sidedish, indexsd) {
 `;
 }
 
+function addToCart(type, index) {
 
-let cart = [];
-let deliveryCost = 5;
-let amount = 0;
+  let product;
+  if (type === 'main') {
+    product = mainDishes[index];
+  } else if (type === 'side') {
+    product = sideDishes[index];
+  } else {
+    return;
+  }
 
-function addToCart(index) {
-  const product = mainDishes[index];
   let itemFound = false;
-
-  // check if item is already in cart, loops through existing items
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].name === product.name) {
       cart[i].amount++;
@@ -134,14 +137,13 @@ function addToCart(index) {
       break;
     }
   }
-  // if item not found, push to cart-array
-    if (!itemFound) {
-      cart.push({
-        name: product.name,
-        price: product.price,
-        amount: 1
-      });
-    }
+  if (!itemFound) {
+    cart.push({
+      name: product.name,
+      price: product.price,
+      amount: 1
+    });
+  }
   renderCart();
 }
 
