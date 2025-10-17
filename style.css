@@ -46,7 +46,7 @@ cursor: pointer;
 .menu-section {
   width: calc(100% - 300px);
   flex: 1;
-}
+  }
 
 .hero-div img {
   width: 100%;
