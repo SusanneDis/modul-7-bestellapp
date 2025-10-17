@@ -1,13 +1,34 @@
 * {
-  box-sizing: border-box;
   margin: 0;
+  box-sizing: border-box;
+}
+
+html {
   scroll-behavior: smooth;
+  font-family: "Lexend Deca", sans-serif;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: rgb(61, 61, 61);
 }
 
 a {
   text-decoration: none;
 }
-header {
-  display: flex;
-  justify-content: space-around;
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.padding {
+  padding-left: 20px;
+  padding-right: 20px;
 }
