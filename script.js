@@ -1,5 +1,3 @@
-
-
 let cart = [];
 let deliveryCost = 8;
 
@@ -132,6 +130,7 @@ function changeAmount(index, change) {
 function deleteAmount(index) {
   cart.splice(index, 1);
   renderCart();
+  renderCartOverlay();
   saveToLocalStorage();
 }
 
@@ -159,4 +158,26 @@ function renderCartSummary() {
       </div>
     </div>
   `;
+}
+
+// Dialog
+function openCartDialog() {
+const dialog = document.getElementById('cart-dialog');
+const content = document.getElementById('cart-dialog-content');
+
+content.innerHTML = "";
+
+for (let i = 0; i < cart.length; i++) {
+  content.innerHTML += getBasketTemplate(cart[i], i);  
+}
+
+if (cart.length > 0) {
+  content.innerHTML += renderCartSummary();
+}
+
+dialog.showModal();
+}
+
+function closeCartDialog() {
+  document.getElementById('cart-dialog').close();
 }

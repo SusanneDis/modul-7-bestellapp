@@ -100,7 +100,21 @@
     </section>
   </div>
 
+  <!--Dialog-->
+  <div class="button-basket-div">
+    <button onclick="openCartDialog()" class="basket-button">Warenkorb</button>
+  </div>
 
+  <dialog id="cart-dialog" class="cart-dialog">
+    <div class="cart-header">
+    <h2>Warenkorb</h2>
+     <button class="close-x" onclick="closeCartDialog()">X</button>
+    </div>
+   
+    <div id="cart-dialog-content"></div>
+  </dialog>
+
+  <!--Footer-->
   <footer>
     <img src="./assets/icons/logo/Logo.png" alt="Logo Bestellapp">
     <p>Follow us</p>
