@@ -1,25 +1,28 @@
 let cart = [];
 let deliveryCost = 8;
+const closeDialogRef = document.getElementById("cart-dialog");
 
 
 function init() {
   loadFromLocalStorage();
   renderMainDishes(),
-  renderSideDishes(),
-  renderDrinks();
+    renderSideDishes(),
+    renderDrinks();
   renderCart();
 }
 
+
+
 // Local Storage
 function loadFromLocalStorage() {
-const storedCart = localStorage.getItem('cart');
-if (storedCart) {
-  cart = JSON.parse(storedCart);
-}
+  const storedCart = localStorage.getItem('cart');
+  if (storedCart) {
+    cart = JSON.parse(storedCart);
+  }
 }
 
 function saveToLocalStorage() {
-localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 // Main-Dishes
@@ -78,7 +81,7 @@ function addToCart(type, index) {
   }
 
 
-// Checks if item already exists
+  // Checks if item already exists
   let itemFound = false;
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].name === product.name) {
@@ -101,36 +104,38 @@ function addToCart(type, index) {
 
 // Cart
 function renderCart() {
-  let basket = document.getElementById('basket-div');
+  const basket = document.getElementById('basket-div');
   basket.innerHTML = "";
 
   basket.innerHTML += getBasketHeaderTemplate();
 
-  for (let i = 0; i < cart.length; i++) {
-    basket.innerHTML += getBasketTemplate(cart[i], i);
-  }
-  
-  if (cart.length > 0) {
-    basket.innerHTML += renderCartSummary();
-  }
+  renderCartContent('basket-div');
 }
 
 
 function changeAmount(index, change) {
   cart[index].amount += change;
 
-    if (cart[index].amount <= 0) {
+  if (cart[index].amount <= 0) {
     cart.splice(index, 1);
   }
   renderCart();
+
+  if (document.getElementById('cart-dialog').open) {
+    renderCartOverlay();
+  }
   saveToLocalStorage();
 }
 
 
 function deleteAmount(index) {
   cart.splice(index, 1);
+  
   renderCart();
-  renderCartOverlay();
+
+  if (document.getElementById('cart-dialog').open) {
+    renderCartOverlay();
+  }
   saveToLocalStorage();
 }
 
@@ -160,24 +165,62 @@ function renderCartSummary() {
   `;
 }
 
-// Dialog
+// dialog
 function openCartDialog() {
-const dialog = document.getElementById('cart-dialog');
-const content = document.getElementById('cart-dialog-content');
+  const dialog = document.getElementById('cart-dialog');
+  
+  renderCartContent('cart-dialog-content');
+  
+  dialog.showModal();
 
-content.innerHTML = "";
-
-for (let i = 0; i < cart.length; i++) {
-  content.innerHTML += getBasketTemplate(cart[i], i);  
+  const basketButton = document.querySelector('.basket-button');
+  basketButton.setAttribute('aria-expanded', 'true');
 }
 
-if (cart.length > 0) {
-  content.innerHTML += renderCartSummary();
+// show basket in dialog
+function renderCartOverlay() {
+  const content = document.getElementById('cart-dialog-content');
+  content.innerHTML = "";
+
+  for (let i = 0; i < cart.length; i++) {
+    content.innerHTML += getBasketTemplate(cart[i], i);
+  }
+
+  if (cart.length > 0) {
+    content.innerHTML += renderCartSummary();
+  }
 }
 
-dialog.showModal();
-}
-
+// close dialog
 function closeCartDialog() {
-  document.getElementById('cart-dialog').close();
+  document.getElementById('cart-dialog');
+  dialog.close();
+
+  const basketButton = document.querySelector('.basket-button');
+  basketButton.setAttribute('aria-expanded', 'false');
 }
+
+
+// close dialog in backdrop
+closeDialogRef.addEventListener("click", (e) => {
+  if (e.target === closeDialogRef) {
+    closeDialogRef.close();
+  }
+});
+
+// check if basket empty, show text
+
+function renderCartContent(containerId) {
+const container = document.getElementById(containerId);
+container.innerHTML = "";
+
+if (cart.length === 0) {
+container.innerHTML = getEmptyBasketTemplate();
+} else {
+for (let index = 0; index < cart.length; index++) {
+  container.innerHTML += getBasketTemplate(cart[index], index);
+  }
+  container.innerHTML += renderCartSummary();
+}
+}
+
