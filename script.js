@@ -5,11 +5,10 @@ let deliveryCost = 8;
 function init() {
   loadFromLocalStorage();
   renderMainDishes(),
-    renderSideDishes(),
-    renderDrinks();
+  renderSideDishes(),
+  renderDrinks();
   renderCart();
 }
-
 
 
 // Local Storage
@@ -20,9 +19,11 @@ function loadFromLocalStorage() {
   }
 }
 
+
 function saveToLocalStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
+
 
 // Main-Dishes
 function renderMainDishes() {
@@ -37,6 +38,7 @@ function renderMainDishes() {
   }
 }
 
+
 // Side-Dishes
 function renderSideDishes() {
 
@@ -49,6 +51,7 @@ function renderSideDishes() {
     sdContainer.innerHTML += getSideDishesTemplate(sidedish, index);
   }
 }
+
 
 // Drinks
 function renderDrinks() {
@@ -63,8 +66,8 @@ function renderDrinks() {
   }
 }
 
-// Add to cart
 
+// Add to cart
 // Check if main, side or drinks
 function addToCart(type, index) {
 
@@ -168,7 +171,7 @@ function renderCartSummary() {
 }
 
 
-// dialog
+// Dialog
 function openCartDialog() {
   const dialog = document.getElementById('cart-dialog');
 
@@ -207,15 +210,14 @@ function renderCartContent(containerId) {
   const container = document.getElementById(containerId);
   container.innerHTML = "";
 
-  if (cart.length === 0) {
   if (containerId === 'basket-div') {
   container.innerHTML = getBasketHeaderTemplate();
   }
+
+  if (cart.length === 0) {
   container.innerHTML += getEmptyBasketTemplate();
   } else {
-  if (containerId === 'basket-div') {
-  container.innerHTML += getBasketHeaderTemplate();
-  }
+  
   for (let index = 0; index < cart.length; index++) {
   container.innerHTML += getBasketTemplate(cart[index], index);
   }
@@ -223,7 +225,7 @@ function renderCartContent(containerId) {
   }
   } 
 
-
+// send Order 
 function sendOrder() {
 cart = [];
 saveToLocalStorage();
