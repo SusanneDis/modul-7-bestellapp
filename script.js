@@ -161,8 +161,12 @@ function renderCartSummary() {
         <span><strong>CHF ${total.toFixed(2)}</strong></span>
       </div>
     </div>
+    <div class="send-order-button-div">
+    <button class="basket-button2" onclick="sendOrder()">Jetzt bestellen</button>
+    </div>
   `;
 }
+
 
 // dialog
 function openCartDialog() {
@@ -197,24 +201,49 @@ closeDialogRef.addEventListener("click", (e) => {
   }
 });
 
-// check if baskets empty, show text
 
+// check if baskets empty, show text
 function renderCartContent(containerId) {
   const container = document.getElementById(containerId);
-  
-  if (containerId === 'basket-div') {
-container.innerHTML = getBasketHeaderTemplate();
-  } else {
- container.innerHTML = "";
-  }
-  
+  container.innerHTML = "";
+
   if (cart.length === 0) {
-    container.innerHTML = getEmptyBasketTemplate();
-  } else {
-    for (let index = 0; index < cart.length; index++) {
-      container.innerHTML += getBasketTemplate(cart[index], index);
-    }
-    container.innerHTML += renderCartSummary();
+  if (containerId === 'basket-div') {
+  container.innerHTML = getBasketHeaderTemplate();
   }
+  container.innerHTML += getEmptyBasketTemplate();
+  } else {
+  if (containerId === 'basket-div') {
+  container.innerHTML += getBasketHeaderTemplate();
+  }
+  for (let index = 0; index < cart.length; index++) {
+  container.innerHTML += getBasketTemplate(cart[index], index);
+  }
+  container.innerHTML += renderCartSummary();
+  }
+  } 
+
+
+function sendOrder() {
+cart = [];
+saveToLocalStorage();
+
+renderCartContent('basket-div');
+renderCartContent('cart-dialog-content');
+
+const orderDialog = document.getElementById('order-dialog');
+const orderContent = document.getElementById('order-dialog-content');
+orderContent.innerHTML = getOrderSendTemplate();
+
+const cartDialog = document.getElementById('cart-dialog');
+if (cartDialog.open) cartDialog.close();
+
+orderDialog.showModal();
+}
+
+
+function closeOrderDialog() {
+  const orderDialog = document.getElementById('order-dialog');
+  orderDialog.close();
 }
 

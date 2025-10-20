@@ -73,6 +73,17 @@ aria-label="Zum Warenkorb hinzufügen: ${drinks.name}" tabindex="0">
     `;
   }
 
+function getOrderSendTemplate() {
+return `
+<div class="order-sent-container">
+<h2>Vielen Dank für deine Bestellung!</h2>
+<p>Deine Bestellung wurde erfolgreich übermittelt.</p>
+<button class="close-order-dialog" onclick="closeOrderDialog()">Schliessen</button>
+</div>
+`;
+}
+
+
 function getEmptyBasketTemplate() {
 return `
       <div class="basket-header">

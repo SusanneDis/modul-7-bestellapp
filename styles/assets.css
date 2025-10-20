@@ -57,6 +57,25 @@
   transition: transform 0.1s ease;
 }
 
+.basket-button2 {
+ width: 200px;
+  height: 40px;
+  background-color: rgb(44, 43, 43);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.send-order-button-div {
+display: flex;
+justify-content: center;
+margin-top: 20px;
+}
+
 .basket-button:active {
   transform: scale(0.95);
 }

@@ -104,11 +104,8 @@
 
     <!--Section Shopping-Cart-->
     <section class="shopping-cart">
-
       <div class="basket-div" id="basket-div">
-        <div class="basket-header">
-          <h2>Warenkorb</h2>
-        </div>
+        <div class="basket-header"></div>
       </div>
     </section>
     
@@ -127,6 +124,11 @@
         onclick="closeCartDialog()">X</button>
     </header>
     <section id="cart-dialog-content" class="cart-dialog-content" aria-live="polite"></section>
+  </dialog>
+
+  <dialog id="order-dialog" class="order-dialog" aria-modal="true" role="alertdialog" aria-labelledby="order-title">
+  <section id="order-dialog-content" class="order-dialog-content" aria-live="polite"></section>
+
   </dialog>
 
   <!--Footer-->
