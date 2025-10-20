@@ -67,6 +67,7 @@ Die App legt großen Wert auf **Barrierefreiheit (ARIA)** und **Responsivität**
 ---
 
 ## 🧩 Hauptfunktionen
+
 Funktion	Beschreibung
 addToCart(type, index)	Fügt Produkt in den Warenkorb hinzu
 renderCartContent(containerId)	Rendert Warenkorb-Inhalt (Sidebar + Dialog)
