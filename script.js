@@ -1,6 +1,5 @@
 let cart = [];
 let deliveryCost = 8;
-const closeDialogRef = document.getElementById("cart-dialog");
 
 
 function init() {
@@ -130,7 +129,7 @@ function changeAmount(index, change) {
 
 function deleteAmount(index) {
   cart.splice(index, 1);
-  
+
   renderCart();
 
   if (document.getElementById('cart-dialog').open) {
@@ -168,59 +167,54 @@ function renderCartSummary() {
 // dialog
 function openCartDialog() {
   const dialog = document.getElementById('cart-dialog');
-  
+
   renderCartContent('cart-dialog-content');
-  
+
   dialog.showModal();
 
   const basketButton = document.querySelector('.basket-button');
   basketButton.setAttribute('aria-expanded', 'true');
 }
 
-// show basket in dialog
+
 function renderCartOverlay() {
-  const content = document.getElementById('cart-dialog-content');
-  content.innerHTML = "";
-
-  for (let i = 0; i < cart.length; i++) {
-    content.innerHTML += getBasketTemplate(cart[i], i);
-  }
-
-  if (cart.length > 0) {
-    content.innerHTML += renderCartSummary();
-  }
+  renderCartContent('cart-dialog-content');
 }
 
-// close dialog
+
 function closeCartDialog() {
-  document.getElementById('cart-dialog');
+  const dialog = document.getElementById('cart-dialog');
   dialog.close();
 
   const basketButton = document.querySelector('.basket-button');
   basketButton.setAttribute('aria-expanded', 'false');
 }
 
-
-// close dialog in backdrop
+const closeDialogRef = document.getElementById("cart-dialog");
 closeDialogRef.addEventListener("click", (e) => {
   if (e.target === closeDialogRef) {
-    closeDialogRef.close();
+    closeCartDialog();
   }
 });
 
-// check if basket empty, show text
+// check if baskets empty, show text
 
 function renderCartContent(containerId) {
-const container = document.getElementById(containerId);
-container.innerHTML = "";
-
-if (cart.length === 0) {
-container.innerHTML = getEmptyBasketTemplate();
-} else {
-for (let index = 0; index < cart.length; index++) {
-  container.innerHTML += getBasketTemplate(cart[index], index);
+  const container = document.getElementById(containerId);
+  
+  if (containerId === 'basket-div') {
+container.innerHTML = getBasketHeaderTemplate();
+  } else {
+ container.innerHTML = "";
   }
-  container.innerHTML += renderCartSummary();
-}
+  
+  if (cart.length === 0) {
+    container.innerHTML = getEmptyBasketTemplate();
+  } else {
+    for (let index = 0; index < cart.length; index++) {
+      container.innerHTML += getBasketTemplate(cart[index], index);
+    }
+    container.innerHTML += renderCartSummary();
+  }
 }
 

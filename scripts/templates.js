@@ -74,6 +74,11 @@ aria-label="Zum Warenkorb hinzufügen: ${drinks.name}" tabindex="0">
   }
 
 function getEmptyBasketTemplate() {
-return `<p class="text-empty-basket">Dein Warenkorb ist noch leer.</p>`
+return `
+      <div class="basket-header">
+        <h2 tabindex="0">Warenkorb</h2>
+      </div>
+      <p class="text-empty-basket">Dein Warenkorb ist noch leer.</p>
+      `;
 }
 
