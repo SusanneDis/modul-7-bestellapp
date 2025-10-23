@@ -79,3 +79,50 @@ margin-top: 20px;
 .basket-button:active {
   transform: scale(0.95);
 }
+
+
+/* order-dialog*/
+
+.order-dialog {
+width: 90%;
+max-width: 400px;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+border: none;
+border-radius: 10px;
+padding: 30px 30px;
+background: white;
+box-shadow: 0 0 15px rgba(0,0,0,0.4);
+text-align: center;
+transition: opacity 0.3s ease;
+}
+
+.order-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.order-sent-container h2 {
+  margin-bottom: 10px;
+  color: rgb(44,43,43);
+}
+
+.order-sent-container p {
+margin-bottom: 20px;
+color: grey;
+}
+
+.close-order-dialog {
+background-color: rgb(255, 128, 0);
+color: white;
+padding: 10px 20px;
+border-radius: 8px;
+border: none;
+cursor: pointer;
+font-weight: bold;
+}
+
+.close-order-dialog:hover {
+  background-color: rgb(230, 115, 0);
+}

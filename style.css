@@ -1,20 +1,21 @@
 .adjust-width-center {
-  padding-left: calc((100% - 1920px) / 2);
-  padding-right: calc((100% - 1920px) / 2);
-}
+ padding-left: 0;
+ padding-right: 0;
+ }
 
 /* Header */
 header {
   background-color: rgb(255, 128, 0);
   height: 80px;
   width: 100%;
-}
+ }
 
 .header-div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+  margin-top: 10px;
+  }
 
 header img:hover {
   cursor: pointer;
@@ -43,10 +44,20 @@ header img:hover {
   flex: 1;
 }
 
-/* Menu Sektion */
+/* Menu Section */
 .menu-section {
   width: calc(100% - 300px);
   flex: 1;
+  position: relative;
+}
+
+.floating-logo {
+position: absolute;
+top: 50px;
+left: 50%;
+transform: translateX(-50%);
+width: 150px;
+z-index: 5;
 }
 
 .hero-div img {
@@ -103,68 +114,11 @@ header img:hover {
   margin-bottom: 10px;
 }
 
-/* Basket Sektion*/
+/* Basket Section*/
 .shopping-cart {
   width: 300px;
   position: relative;
   border-left: 1px solid rgb(214, 212, 212);
-}
-
-.basket-div {
-  width: 100%;
-  height: calc(100vh - 140px);
-  position: sticky;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  overflow-y:auto;
-}
-
-.basket-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid rgb(214, 212, 212);
-  padding: 10px;
-}
-
-.product-list-basket {
-  border-bottom: 2px solid rgb(214, 212, 212);
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-.amount-price-div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 5px;
-  padding-top: 5px;
-}
-
-.amount-div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 5px;
-}
-
-.amount {
-  display: flex;
-  align-items: center;
-}
-
-.summary-div {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  line-height: 28px;
-}
-
-.price-distance {
-  display: flex;
-  justify-content: space-between;
 }
 
 /* Footer */
@@ -198,109 +152,16 @@ footer img {
   height: auto;
 }
 
-/* Dialog */
-
-.cart-dialog {
-  width: 90%;
-  max-width: 400px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  border: none;
-  border-radius: 10px;
-  padding: 0px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-  transition: transform 0.4s ease, opacity 0.4s ease;
+.social-media-icons img:hover {
+ cursor: pointer;
 }
 
-.cart-dialog[open] {
-  opacity: 1;
+@media (min-width: 1920px) {
+.adjust-width-center {
+padding-left: calc((100% - 1920px) / 2);
+padding-right: calc((100% - 1920px) / 2);
 }
-
-.cart-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.6);
 }
-
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid rgba(214, 212, 212);
-}
-
-.cart-header h2 {
-  margin: 0;
-}
-
-.close-x {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 5px;
-  user-select: none;
-}
-
-.cart-dialog-content {
-  min-height: 200px;
-  overflow-y: auto;
-  padding: 10px;
-}
-
-.text-empty-basket {
-  text-align: center;
-  padding: 20px;
-}
-
-/* order-dialog*/
-
-.order-dialog {
-width: 90%;
-max-width: 400px;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-border: none;
-border-radius: 10px;
-padding: 30px 30px;
-background: white;
-box-shadow: 0 0 15px rgba(0,0,0,0.4);
-text-align: center;
-transition: opacity 0.3s ease;
-}
-
-.order-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.order-sent-container h2 {
-  margin-bottom: 10px;
-  color: rgb(44,43,43);
-}
-
-.order-sent-container p {
-margin-bottom: 20px;
-color: grey;
-}
-
-.close-order-dialog {
-background-color: rgb(255, 128, 0);
-color: white;
-padding: 10px 20px;
-border-radius: 8px;
-border: none;
-cursor: pointer;
-font-weight: bold;
-}
-
-.close-order-dialog:hover {
-  background-color: rgb(230, 115, 0);
-}
-
 
 @media (min-width: 800px) {
 
@@ -310,6 +171,13 @@ font-weight: bold;
 
   .basket-button {
     display: none;
+  }
+}
+
+@media (max-width: 1070px) {
+
+  .floating-logo {
+left: 60%;
   }
 }
 
@@ -324,9 +192,18 @@ font-weight: bold;
   }
 }
 
-@media (max-width: 400px) {
-
-  h1 {
-    font-size: 25px;
-  }
+@media (max-width: 530px) {
+.floating-logo {
+position: static;
+z-index: auto;
+transform: none;
+margin: 0 auto;
+width: 100px;
 }
+
+.logo-wrapper {
+display: flex;
+justify-content: center;
+}
+}
+
