@@ -32,3 +32,9 @@ button {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.adjust-width-center {
+ padding-left: 0;
+ padding-right: 0;
+ }
+
